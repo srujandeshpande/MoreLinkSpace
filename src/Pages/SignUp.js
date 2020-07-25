@@ -5,42 +5,36 @@ import * as Realm from "realm-web";
 
 export default function SignUp() {
 
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
   const app = new Realm.App({ id: "morelinkspace-dekxs" });
   var assert = require('assert');
-
-  const email = "someone@example.com";
-  const password = "Pa55w0rd";
-
-
+/*
   async function createUser(email, password) {
     const conf = await app.emailPasswordAuth.registerUser(email, password);
     console.log(conf)
   }
 
-  //createUser("joe.jasper@example.com", "passw0rd").then(user => {console.log("Successfully logged in!", user)})
-
   const onSubmit = () => {
-    console.log("ha");
-    alert('No')
+    createUser("joe.jasper@example.com", "passw0rd").then(user => {
+      console.log("Successfully logged in!", user)})
   };
-
+*/
   return (
     <div>
       SignUp
-      <form onSubmit={onSubmit()}>
+      <form onSubmit={13/*onSubmit()*/}>
         <label>
           Email Address:
-          <input type="email" name="email" />
+          <input type="email" name="email" onChange={(e) => setEmail(e.target.value)}/>
         </label>
+        {email}{password}
         <label>
           Password:
-          <input type="password" name="password" />
+          <input type="password" name="password" onChange={(pw) => setPassword(pw.target.value)}/>
         </label>
-        <label>
-          Confirm Password:
-          <input type="password" name="confPassword" />
-        </label>
-          <input type="submit" value="Sign Up" onSubmit={onSubmit}/>
+          <input type="submit" value="Sign Up" />
       </form>
     </div>
   );
