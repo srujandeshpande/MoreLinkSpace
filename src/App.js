@@ -2,9 +2,9 @@ import React from 'react';
 import {BrowserRouter,Switch,Route} from 'react-router-dom';
 import './App.css';
 
-import Homepage from './Homepage';
-import Profile from './Profile';
-import EditProfile from './EditProfile';
+import Homepage from './Pages/Homepage';
+import Profile from './Pages/Profile';
+import EditProfile from './Pages/EditProfile';
 
 function App() {
   return (
