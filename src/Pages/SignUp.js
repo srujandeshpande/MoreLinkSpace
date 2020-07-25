@@ -18,6 +18,7 @@ export default function SignUp() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const dispatch = useDispatch();
 
   const app = new Realm.App({ id: "morelinkspace-dekxs" });
   var assert = require('assert');
@@ -27,25 +28,28 @@ export default function SignUp() {
   }
 
   async function createUser(email, password) {
-    const conf = await app.emailPasswordAuth.registerUser(email, password)
+    await app.emailPasswordAuth.registerUser(email, password)
     .then(
-      val => console.log("done",val)
+      (val) => {
+        console.log("User Successfully Created");
+        dispatch(changeSign(true));
+        dispatch(changeEmail(email));
+      }
     ).catch(
-      val => console.log("die", val)
+      (val) => {
+        console.log("Error Please try again");
+        alert("This email address is already in use or your password is not long enough")
+      }
     );
-    console.log(conf)
   }
 
   function handleNewUserSubmit() {
 
     if(email != "" && password != ""){
-      console.log(email,password);
-      createUser(email,password).then(user => {
-        console.log("Created user:",user)
-      })
+      createUser(email,password);
     }
     else{
-      console.log("fail hah");
+      console.log("Try again");
     }
     //createUser("joe.jasper@example.com", "passw0rd").then(user => {
     //  console.log("Successfully logged in!", user)})
@@ -59,12 +63,11 @@ export default function SignUp() {
         <label>
           Email Address:
           <input type="email" name="email" onChange={(e) => setEmail(e.target.value)}/>
-        </label>
-        {email}{password}
+        </label><br/>
         <label>
-          Password:
+          Password (Must be atleast 6 characters long):
           <input type="password" name="password" onChange={(pw) => setPassword(pw.target.value)}/>
-        </label>
+        </label><br/>
           <input type="submit" value="Sign Up" />
       </form>
     </div>
