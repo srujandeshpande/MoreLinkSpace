@@ -19,6 +19,8 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const dispatch = useDispatch();
+  const email_store = useSelector(selectEmail);
+  const sign_store = useSelector(selectSign);
 
   const app = new Realm.App({ id: "morelinkspace-dekxs" });
   var assert = require('assert');
@@ -32,13 +34,13 @@ export default function SignUp() {
     .then(
       (val) => {
         console.log("User Successfully Created");
-        dispatch(changeSign(true));
+        dispatch(changeSign(email));
         dispatch(changeEmail(email));
       }
     ).catch(
       (val) => {
         console.log("Error Please try again");
-        alert("This email address is already in use or your password is not long enough")
+        alert("This email address is already in use or your password is not long enough");
       }
     );
   }
@@ -61,8 +63,8 @@ export default function SignUp() {
       <form onSubmit={(e) => {e.preventDefault();
         handleNewUserSubmit()}}>
         <label>
-          Email Address:
-          <input type="email" name="email" onChange={(e) => setEmail(e.target.value)}/>
+          Email Address:{email_store}:{sign_store}
+          <input type="email" name="email" onChange={(e) => {setEmail(e.target.value);}}/>
         </label><br/>
         <label>
           Password (Must be atleast 6 characters long):
