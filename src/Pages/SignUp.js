@@ -1,7 +1,18 @@
 import React, { useState } from 'react';
-
-
+import { useSelector, useDispatch } from 'react-redux';
 import * as Realm from "realm-web";
+
+import {
+  changeSign,
+  changeLink,
+  changeEmail,
+  selectSign,
+  selectLink,
+  selectEmail,
+} from '../Redux/linkSlice';
+
+
+
 
 export default function SignUp() {
 
@@ -10,21 +21,41 @@ export default function SignUp() {
 
   const app = new Realm.App({ id: "morelinkspace-dekxs" });
   var assert = require('assert');
-/*
+
+  function testf(){
+    alert("hi")
+  }
+
   async function createUser(email, password) {
-    const conf = await app.emailPasswordAuth.registerUser(email, password);
+    const conf = await app.emailPasswordAuth.registerUser(email, password)
+    .then(
+      val => console.log("done",val)
+    ).catch(
+      val => console.log("die", val)
+    );
     console.log(conf)
   }
 
-  const onSubmit = () => {
-    createUser("joe.jasper@example.com", "passw0rd").then(user => {
-      console.log("Successfully logged in!", user)})
+  function handleNewUserSubmit() {
+
+    if(email != "" && password != ""){
+      console.log(email,password);
+      createUser(email,password).then(user => {
+        console.log("Created user:",user)
+      })
+    }
+    else{
+      console.log("fail hah");
+    }
+    //createUser("joe.jasper@example.com", "passw0rd").then(user => {
+    //  console.log("Successfully logged in!", user)})
   };
-*/
+
   return (
     <div>
       SignUp
-      <form onSubmit={13/*onSubmit()*/}>
+      <form onSubmit={(e) => {e.preventDefault();
+        handleNewUserSubmit()}}>
         <label>
           Email Address:
           <input type="email" name="email" onChange={(e) => setEmail(e.target.value)}/>

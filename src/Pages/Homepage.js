@@ -26,6 +26,9 @@ export default function Homepage() {
     <div>
       <h3>Homepage</h3>
       <SignUp/>
+      <br/>
+      OR
+      <br/>
       <SignIn/>
     </div>
   );

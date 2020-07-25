@@ -10,7 +10,7 @@ export default function Profile() {
 
   return (
     <div>
-      Herer
+      Profile Link hahah
     </div>
   );
 }
