@@ -6,7 +6,7 @@ import * as RealmWeb from "realm-web";
 
 
 
-export default function Profile() {
+export default function Profile(props) {
 
   return (
     <div>

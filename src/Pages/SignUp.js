@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import * as Realm from "realm-web";
+import { useHistory } from "react-router-dom";
 
 import {
   changeSign,
@@ -12,22 +13,21 @@ import {
 } from '../Redux/linkSlice';
 
 
-
-
 export default function SignUp() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [link, setLink] = useState("");
+
   const dispatch = useDispatch();
   const email_store = useSelector(selectEmail);
   const sign_store = useSelector(selectSign);
+  let history = useHistory();
 
   const app = new Realm.App({ id: "morelinkspace-dekxs" });
   var assert = require('assert');
 
-  function testf(){
-    alert("hi")
-  }
+  var status = "Not Set";
 
   async function createUser(email, password) {
     await app.emailPasswordAuth.registerUser(email, password)
@@ -70,6 +70,10 @@ export default function SignUp() {
           Password (Must be atleast 6 characters long):
           <input type="password" name="password" onChange={(pw) => setPassword(pw.target.value)}/>
         </label><br/>
+        <label>
+          Link:
+          <input type="text" name="Link" onChange={(e) => {setLink(e.target.value)}}/>
+        </label>{status}<br/>
           <input type="submit" value="Sign Up" />
       </form>
     </div>

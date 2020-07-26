@@ -6,6 +6,7 @@ export const linkSlice = createSlice({
     sign:"",
     link: "",
     email: "",
+    user:"",
   },
   reducers: {
       // Redux Toolkit allows us to write "mutating" logic in reducers. It
@@ -21,10 +22,13 @@ export const linkSlice = createSlice({
     changeEmail: (state, action) => {
       state.email = action.payload;
     },
+    changeUser: (state, action) => {
+      state.user = action.payload;
+    },
   },
 });
 
-export const { changeSign, changeLink, changeEmail } = linkSlice.actions;
+export const { changeSign, changeLink, changeEmail, changeUser } = linkSlice.actions;
 
 // The function below is called a thunk and allows us to perform async logic. It
 // can be dispatched like a regular action: `dispatch(incrementAsync(10))`. This
@@ -44,5 +48,7 @@ export const selectSign = state => state.link.sign;
 export const selectLink = state => state.link.link;
 
 export const selectEmail = state => state.link.email;
+
+export const selectUser = state => state.link.user;
 
 export default linkSlice.reducer;
