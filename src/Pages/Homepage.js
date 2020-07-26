@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import * as Realm from "realm-web";
 
 import SignUp from './SignUp';
-import SignIn from './SignIn';
 import Sign from './Sign';
 
 /*
