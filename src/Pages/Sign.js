@@ -8,7 +8,7 @@ const app = new Realm.App({ id: REALM_APP_ID });
 
 
 // Create a component that displays the given user's details
-function UserDetail({ user }) {
+function UserDetail({ user, email }) {
 
   const [datal, setDatal] = useState("");
   const [link, setLink] = useState("");
@@ -85,10 +85,12 @@ function UserDetail({ user }) {
 }
 
 
+
 const App = () => {
   // Keep the logged in Realm user in local state. This lets the app re-render
   // whenever the current user changes (e.g. logs in or logs out).
   const [user, setUser] = useState(app.currentUser);
+  //const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
 
   // If a user is logged in, show their details.
@@ -97,7 +99,7 @@ const App = () => {
     <div className="App">
       <div className="App-header">
       <h1>More Link Space!</h1>
-        {user ? <UserDetail user={user}/> : <Login setUser={setUser} email={email} setEmail={setEmail} />}
+        {user ? <UserDetail user={user} email={email}/> : <Login setUser={setUser} email={email} setEmail={setEmail} />}
       </div>
     </div>
   );
