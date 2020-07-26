@@ -3,6 +3,7 @@ import * as Realm from "realm-web";
 
 import SignUp from './SignUp';
 import SignIn from './SignIn';
+import Sign from './Sign';
 
 /*
 import { makeStyles } from '@material-ui/core/styles';
@@ -25,11 +26,10 @@ export default function Homepage() {
   return (
     <div>
       <h3>Homepage</h3>
-      <SignUp/>
+      <Sign/>
       <br/>
       OR
       <br/>
-      <SignIn/>
     </div>
   );
 }

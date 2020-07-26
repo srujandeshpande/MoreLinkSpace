@@ -20,7 +20,7 @@ export default function SignIn() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [user, setUser] = useState("");
+  const [userv, setUser] = useState("");
   const dispatch = useDispatch();
   const email_store = useSelector(selectEmail);
   const sign_store = useSelector(selectSign);
@@ -41,7 +41,8 @@ export default function SignIn() {
     // `App.currentUser` updates to match the logged in user
       assert(user.id === app.currentUser.id);
       //dispatch(changeUser(JSON.stringify(user)));
-      history.push('/someRoute', {var:user});
+      setUser(user);
+      //history.push('/someRoute', {var:user});
       return user;
     } catch(err) {
       console.error("Failed to log in", err);
@@ -78,7 +79,7 @@ export default function SignIn() {
         <label>
           Password:{user_store}
           <input type="password" name="password" onChange={(pw) => setPassword(pw.target.value)}/>
-        </label>
+        </label>{userv}
           <input type="submit" value="Sign In" />
       </form>
     </div>
