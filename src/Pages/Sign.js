@@ -18,8 +18,8 @@ function UserDetail({ user }) {
     await user.functions.searchLinks(tempLink).then(
     (val)=>{
       console.log(val);
-      if(val.length == 0 && link == "") {
-
+      if(val.length === 0) {
+        console.log("Here");
         async function setLinkF() {
           console.log(user.id, tempLink);
           await user.functions.setLink(user.id, tempLink).then(
@@ -37,7 +37,9 @@ function UserDetail({ user }) {
         setLinkF();
 
       }
-      setDatal(val);
+      else {
+        alert("Link already in use");
+      }
     }
   )};
 
@@ -45,22 +47,36 @@ function UserDetail({ user }) {
   const result = async () => {await user.functions.getData(user.id).then(
     (val)=>{
       console.log(val);
-      setDatal(val);
+      setLink(val.link);
+      if(val.data){
+        setDatal(val.data);
+      }
+      else{
+        setDatal([]);
+      }
     }
   )};
+  result();
 
-
-  console.log(result().value);
   return (
     <div>{datal}
       <h1>Logged in with id: {user.id}</h1>
       <form onSubmit={(e) => { e.preventDefault(); DupCheck()}}>
         <label>
           Custom Link - {linkStat}
-          <input type="text" name="link" onChange={(e) => { e.preventDefault(); setTempLink(e.target.value)}}/>
+          <input type="text" name="link" placeholder={link} onChange={(e) => { e.preventDefault(); setTempLink(e.target.value)}}/>
           <input type="submit" value="Save Custom Link" />
         </label>
       </form>
+      <table>
+      <tr>
+      <th>Name</th>
+      <th>URL</th>
+      </tr>
+      {datal.map(function(name) {
+                    return <tr><td key={ name.url }>{name.url}</td><td>{name.desc}</td></tr>;
+                  })}
+      </table>
     </div>
   );
 }
