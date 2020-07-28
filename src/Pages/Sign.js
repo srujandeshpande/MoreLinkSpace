@@ -51,10 +51,10 @@ function UserDetail({ user, email }) {
       console.log(val);
       setLink(val.link);
       if(val.data){
-        setDatal(val.data);
+        setDatal("ji");
       }
       else{
-        setDatal([]);
+        setDatal(["hi"]);
       }
     }
   ).catch(
@@ -75,10 +75,7 @@ function UserDetail({ user, email }) {
         </label>
       </form>
       <table>
-      <tr>
-      <th>Name</th>
-      <th>URL</th>
-      </tr>
+      {datal}
       </table>
     </div>
   );
