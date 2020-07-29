@@ -52,6 +52,7 @@ function UserDetail({ user, email }) {
       setLink(val.link);
       if(val.data){
         setDatal("ji");
+        console.log(val);
       }
       else{
         setDatal(["hi"]);
@@ -62,7 +63,7 @@ function UserDetail({ user, email }) {
       console.log(val);
     }
   )};
-  result();
+  //result();
 
   return (
     <div>{datal}
@@ -74,9 +75,18 @@ function UserDetail({ user, email }) {
           <input type="submit" value="Save Custom Link" />
         </label>
       </form>
-      <table>
-      {datal}
-      </table>
+      <thead>
+        <tr>
+          <th>URL</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>https://google.com</td>
+          <td>Mock</td>
+        </tr>
+      </tbody>
     </div>
   );
 }
