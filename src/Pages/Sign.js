@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import * as Realm from "realm-web";
 
 import Login from "./Login";
@@ -10,10 +10,39 @@ const app = new Realm.App({ id: REALM_APP_ID });
 // Create a component that displays the given user's details
 function UserDetail({ user, email }) {
 
+  //console.log("Func,",email);
+
   const [datal, setDatal] = useState("");
   const [link, setLink] = useState("");
   const [tempLink, setTempLink] = useState("");
   const [linkStat, setLinkStat] = useState(false);
+  const [dataLoaded, setDataLoaded] = useState(true);
+
+  useEffect(() => {
+
+    if(dataLoaded){
+      (async () => {await user.functions.getData(user.id).then(
+        (val)=>{
+          console.log(val);
+          setLink(val.link);
+          if(val.data){
+            setDatal("ji");
+            console.log(val);
+          }
+          else{
+            setDatal(["hi"]);
+          }
+        }
+      ).catch(
+        (val) =>{
+          console.log(val);
+        }
+      )})();
+
+      setDataLoaded(false);
+    }
+
+  })
 
   async function DupCheck() {
     console.log(tempLink);
@@ -46,25 +75,6 @@ function UserDetail({ user, email }) {
   )};
 
 
-  const result = async () => {await user.functions.getData(user.id).then(
-    (val)=>{
-      console.log(val);
-      setLink(val.link);
-      if(val.data){
-        setDatal("ji");
-        console.log(val);
-      }
-      else{
-        setDatal(["hi"]);
-      }
-    }
-  ).catch(
-    (val) =>{
-      console.log(val);
-    }
-  )};
-  //result();
-
   return (
     <div>{datal}
       <h1>Logged in with id: {user.id}</h1>
@@ -75,6 +85,7 @@ function UserDetail({ user, email }) {
           <input type="submit" value="Save Custom Link" />
         </label>
       </form>
+      <table>
       <thead>
         <tr>
           <th>URL</th>
@@ -83,10 +94,11 @@ function UserDetail({ user, email }) {
       </thead>
       <tbody>
         <tr>
-          <td>https://google.com</td>
+          <td><a href="https://google.com">https://google.com</a></td>
           <td>Mock</td>
         </tr>
       </tbody>
+      </table>
     </div>
   );
 }
@@ -97,6 +109,7 @@ const App = () => {
   // Keep the logged in Realm user in local state. This lets the app re-render
   // whenever the current user changes (e.g. logs in or logs out).
   const [user, setUser] = useState(app.currentUser);
+  console.log(user);
   //const [user, setUser] = useState("");
   const [email, setEmail] = useState("");
 
