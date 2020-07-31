@@ -80,10 +80,21 @@ function UserDetail({ user, email }) {
       <h1>Logged in with id: {user.id}</h1>
       <form onSubmit={(e) => { e.preventDefault(); DupCheck()}}>
         <label>
-          Custom Link - {linkStat}
+          Custom Link
           <input type="text" name="link" placeholder={link} onChange={(e) => { e.preventDefault(); setTempLink(e.target.value)}}/>
-          <input type="submit" value="Save Custom Link" />
         </label>
+        <input type="submit" value="Save Custom Link" />
+      </form>
+      <form onSubmit={(e) => { e.preventDefault(); }}>
+        <label>
+          Add New link
+          <input type="text" name="url" onChange={(e) => { e.preventDefault();}}/>
+        </label>
+        <label>
+          Link description
+          <input type="text" name="url" onChange={(e) => { e.preventDefault();}}/>
+        </label>
+        <input type="submit" value="Save Custom Link" />
       </form>
       <table>
       <thead>
