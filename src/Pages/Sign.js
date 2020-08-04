@@ -17,6 +17,8 @@ function UserDetail({ user, email }) {
   const [tempLink, setTempLink] = useState("");
   const [linkStat, setLinkStat] = useState(false);
   const [dataLoaded, setDataLoaded] = useState(true);
+  const [iurl, setIurl] = useState("");
+  const [desc, setDesc] = useState("");
 
   useEffect(() => {
 
@@ -75,6 +77,37 @@ function UserDetail({ user, email }) {
   )};
 
 
+  async function AddLink() {
+    console.log(tempLink);
+    await user.functions.searchLinks(tempLink).then(
+    (val)=>{
+      console.log(val);
+      if(val.length === 0) {
+        console.log("Here");
+        async function setLinkF() {
+          console.log(user.id, tempLink);
+          await user.functions.setLink(user.id, tempLink).then(
+          (val) => {
+            alert("Link Successfully Set");
+            setLink(tempLink);
+          }).catch(
+          (val) => {
+            alert("Please try again/later");
+            console.log(val);
+          }).finally(() => {
+            console.log("This happened");
+          });
+        }
+        setLinkF();
+
+      }
+      else {
+        alert("Link already in use");
+      }
+    }
+  )};
+
+
   return (
     <div>{datal}
       <h1>Logged in with id: {user.id}</h1>
@@ -85,14 +118,14 @@ function UserDetail({ user, email }) {
         </label>
         <input type="submit" value="Save Custom Link" />
       </form>
-      <form onSubmit={(e) => { e.preventDefault(); }}>
+      <form onSubmit={(e) => { e.preventDefault(); AddLink()}}>
         <label>
           Add New link
-          <input type="text" name="url" onChange={(e) => { e.preventDefault();}}/>
+          <input type="text" name="url" onChange={(e) => { e.preventDefault(); setIurl(e.target.value)}}/>
         </label>
         <label>
           Link description
-          <input type="text" name="url" onChange={(e) => { e.preventDefault();}}/>
+          <input type="text" name="url" onChange={(e) => { e.preventDefault(); setDesc(e.target.value)}}/>
         </label>
         <input type="submit" value="Save Custom Link" />
       </form>
