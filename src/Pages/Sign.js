@@ -79,31 +79,9 @@ function UserDetail({ user, email }) {
 
   async function AddLink() {
     console.log(tempLink);
-    await user.functions.searchLinks(tempLink).then(
+    await user.functions.addUrl(user.id, iurl, desc).then(
     (val)=>{
-      console.log(val);
-      if(val.length === 0) {
-        console.log("Here");
-        async function setLinkF() {
-          console.log(user.id, tempLink);
-          await user.functions.setLink(user.id, tempLink).then(
-          (val) => {
-            alert("Link Successfully Set");
-            setLink(tempLink);
-          }).catch(
-          (val) => {
-            alert("Please try again/later");
-            console.log(val);
-          }).finally(() => {
-            console.log("This happened");
-          });
-        }
-        setLinkF();
-
-      }
-      else {
-        alert("Link already in use");
-      }
+      console.log(val, "Success")
     }
   )};
 
