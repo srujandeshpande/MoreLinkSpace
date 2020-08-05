@@ -19,6 +19,7 @@ function UserDetail({ user, email }) {
   const [dataLoaded, setDataLoaded] = useState(true);
   const [iurl, setIurl] = useState("");
   const [desc, setDesc] = useState("");
+  const [urls, setUrls] = useState("");
 
   useEffect(() => {
 
@@ -82,6 +83,13 @@ function UserDetail({ user, email }) {
     await user.functions.addUrl(user.id, iurl, desc).then(
     (val)=>{
       console.log(val, "Success")
+    }
+  )};
+
+  async function GetLinks() {
+    await user.functions.getLinks(user.id).then(
+    (val)=>{
+      console.log(val, "Success Links")
     }
   )};
 
