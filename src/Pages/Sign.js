@@ -120,12 +120,14 @@ function UserDetail({ user, email }) {
         <tr>
           <th>URL</th>
           <th>Description</th>
+          <th>Edit</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td><a href="https://google.com">https://google.com</a></td>
           <td>Mock</td>
+          <td><button>Delete</button></td>
         </tr>
       </tbody>
       </table>
