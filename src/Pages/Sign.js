@@ -86,12 +86,6 @@ function UserDetail({ user, email }) {
     }
   )};
 
-  async function GetLinks() {
-    await user.functions.getLinks(user.id).then(
-    (val)=>{
-      console.log(val, "Success Links")
-    }
-  )};
 
 
   return (
