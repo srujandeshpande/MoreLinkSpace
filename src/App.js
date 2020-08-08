@@ -7,6 +7,7 @@ import Profile from './Pages/Profile';
 import EditProfile from './Pages/EditProfile';
 
 function App() {
+  document.title = "More Link Space";
   return (
     <BrowserRouter>
       <Switch>

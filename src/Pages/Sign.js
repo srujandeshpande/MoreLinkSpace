@@ -22,7 +22,7 @@ function UserDetail({ user, email }) {
   const [urls, setUrls] = useState("");
 
   useEffect(() => {
-
+    document.title = "Links Home";
     if(dataLoaded){
       (async () => {await user.functions.getData(user.id).then(
         (val)=>{
